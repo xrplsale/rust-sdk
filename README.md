@@ -599,8 +599,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Links
 
 - [XRPL.Sale Platform](https://xrpl.sale)
-- [API Documentation](https://docs.xrpl.sale/api)
-- [Other SDKs](https://docs.xrpl.sale/developers/sdk-downloads)
+- [API Documentation](https://xrpl.sale/docs/api)
+- [Other SDKs](https://xrpl.sale/docs/developers/sdk-downloads)
 - [GitHub Organization](https://github.com/xrplsale)
 
 ---
