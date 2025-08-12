@@ -1,0 +1,102 @@
+[package]
+name = "xrplsale"
+version = "1.0.0"
+edition = "2021"
+rust-version = "1.75"
+authors = ["XRPL.Sale Team <developers@xrpl.sale>"]
+description = "Official Rust SDK for integrating with the XRPL.Sale platform - the native XRPL launchpad for token sales and project funding."
+documentation = "https://docs.rs/xrplsale"
+homepage = "https://xrpl.sale"
+repository = "https://github.com/xrplsale/rust-sdk"
+license = "MIT"
+keywords = ["xrpl", "blockchain", "cryptocurrency", "token-sale", "launchpad"]
+categories = ["api-bindings", "web-programming", "asynchronous"]
+readme = "README.md"
+include = [
+    "src/**/*",
+    "Cargo.toml",
+    "README.md",
+    "LICENSE"
+]
+
+[dependencies]
+# HTTP client with async support
+reqwest = { version = "0.11", features = ["json", "rustls-tls"], default-features = false }
+
+# Async runtime
+tokio = { version = "1.0", features = ["full"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# URL manipulation
+url = { version = "2.4", features = ["serde"] }
+
+# Cryptography for webhook signatures
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+
+# Datetime handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# UUID support
+uuid = { version = "1.0", features = ["v4", "serde"] }
+
+# Logging
+log = "0.4"
+
+# Configuration
+config = { version = "0.14", optional = true }
+
+# Axum integration (optional)
+axum = { version = "0.7", optional = true }
+tower = { version = "0.4", optional = true }
+tower-http = { version = "0.5", optional = true }
+
+# Actix-web integration (optional)
+actix-web = { version = "4.0", optional = true }
+
+# Warp integration (optional)
+warp = { version = "0.3", optional = true }
+
+[dev-dependencies]
+tokio-test = "0.4"
+mockito = "1.2"
+wiremock = "0.5"
+
+[features]
+default = ["rustls"]
+rustls = ["reqwest/rustls-tls"]
+native-tls = ["reqwest/native-tls"]
+
+# Web framework integrations
+axum-integration = ["axum", "tower", "tower-http"]
+actix-integration = ["actix-web"]
+warp-integration = ["warp"]
+
+# Configuration support
+config-support = ["config"]
+
+[[example]]
+name = "basic_usage"
+path = "examples/basic_usage.rs"
+
+[[example]]
+name = "axum_webhook"
+path = "examples/axum_webhook.rs"
+required-features = ["axum-integration"]
+
+[[example]]
+name = "actix_webhook"
+path = "examples/actix_webhook.rs"
+required-features = ["actix-integration"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
